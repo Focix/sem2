@@ -6,7 +6,7 @@ int fact (int x){
     else{
         return x*fact(x-1);
     }
-};
+}
 
 int main(){
     int n;
