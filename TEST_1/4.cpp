@@ -1,48 +1,41 @@
 #include <iostream>
-
+#include <algorithm>
 int main(){
     int n;
     std::cin >> n;
     int* p = new int[n];
-    int first_point = 0;
-    int second_point = 1;
+    int* d = new int[n];
     for (int i=0; i<n; ++i){
         std::cin >> p[i];
+        d[i]=p[i];
     }
-    if (p[first_point]>p[second_point]){
-        first_point=1;
-        second_point=0;
-    }
-    int min = p[second_point]-p[first_point];
-    for (int i=0; i<n; ++i){
-        for (int j=0; j<n; ++j){
-            if (i!=j){
-                if (abs(p[i]-p[j])<min){
-                    if (p[i]<=p[j]){
-                        first_point=i;
-                        second_point=j;
-                    }
-                    if (p[i]>p[j]){
-                        first_point=j;
-                        second_point=i;
-                    }
-                    min = p[second_point]-p[first_point];
-                }
-                if (abs(p[i]-p[j]) == min) {
-                    if ((p[i]<=p[j]) and (p[i]<p[first_point])){
-                        first_point=i;
-                        second_point=j;
-                    }
-                    if ((p[i]>p[j])and (p[j]<p[first_point])){
-                        first_point=j;
-                        second_point=i;
-                    }
-                }
-            }
+    std::sort(p, p+n);
+    int first_point = 0;
+    int second_point = 1;
+    int min = p[1]-p[0];
+    for (int i=1; i<n-1; ++i){
+        if ((p[i+1]-p[i])<min){
+            first_point=i;
+            second_point=i+1;
+            min = p[second_point] - p[first_point];
         }
     }
-    std::cout << first_point+1<<' '<< second_point+1;
+    for (int i = 0; i<n; ++i){
+        if ((d[i]==p[first_point]) and (first_point!=-1)){
+            std::cout << i+1<<' ';
+            first_point = -1;
+        }
+        if ((d[i]==p[second_point]) and (second_point!=-1)){
+            std::cout << i+1<<' ';
+            second_point = -1;
+        }
+        if ((second_point==-1) and (first_point==-1)){
+            break;
+        }
+    }
     delete[] p;
+    delete[] d;
     return 0;
 }
+
 
