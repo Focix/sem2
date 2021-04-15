@@ -34,6 +34,7 @@ int main(){
         }
     }
     delete[] p;
+    delete[] d;
     return 0;
 }
 
