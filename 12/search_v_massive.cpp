@@ -94,36 +94,32 @@ void selection_sort_recursion(int * start, int* end){
     }
 }
 
-void merge(int *k, int *l, int *m){
-    int size= m - k;
-    int *n = new int[size];
-    for (int i=0; i<size; ++i){
-        if (*k < *l){
-            *n=*k;
-            k+=1;
-            n+=1;
-        }
-        if (*k>*l){
-            *n=*l;
-            l+=1;
-        }
-        if (k=l){
-//нужно дописать
-        }
-    }
-}
+
 
 int main(){
     int n;
-    std::cin >> n;
-    int *p=generate(n, time(0));
+    int m;
+    std::cin >> n>>m;
+    int *p1=generate(n, time(0));
+    int *p2=generate(m, time(0));
     for (int i=0; i<n; ++i){
-        std::cout << *(p+i)<<' ';
+        std::cout << *(p1+i)<<' ';
     }
     std::cout << '\n';
-    selection_sort_recursion(p, p+n);
+    selection_sort_recursion(p1, p1+n);
     for (int i=0; i<n; ++i){
-        std::cout << *(p+i)<<' ';
+        std::cout << *(p1+i)<<' ';
+    }
+    std::cout << '\n';
+    std::cout << '\n';
+    std::cout << '\n';
+    for (int i=0; i<m; ++i){
+        std::cout << *(p2+i)<<' ';
+    }
+    std::cout << '\n';
+    selection_sort_recursion(p2, p2+m);
+    for (int i=0; i<m; ++i){
+        std::cout << *(p2+i)<<' ';
     }
     return 0;
 }
